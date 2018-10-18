@@ -27,28 +27,6 @@ router.get('/new', function(req, res, next) {
   res.render('posts/new', { title: 'New Post' });
 });
 
-/* GET a form to edit an existing post */
-router.get('/:id/edit', function(req, res, next) {
-  models.Post.findById(req.params.id).then(function(post) {
-    res.render('posts/edit', {
-      title: 'Edit Post',
-      post: post
-    });
-  });
-});
-
-/* POST updated data to an existing post */
-router.post('/:id', function(req, res, next) {
-  models.Post.findById(req.params.id).then(function(post) {
-    post.update({
-      title: req.body.title,
-      body: req.body.body
-    }).then(function() {
-      res.redirect(`/posts/${post.id}`);
-    });
-  });
-});
-
 /* GET a specific post */
 router.get('/:id', function(req, res, next) {
   models.Post.findById(req.params.id).then(function(post) {

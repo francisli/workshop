@@ -1,5 +1,7 @@
 <h1>Posts List</h1>
-<a class="btn btn-primary" href="/posts/new">Create a new Post</a>
+<p>
+  <a class="btn btn-primary" href="/posts/new">Create a new Post</a>
+</p>
 <ul>
 <% for (let post of posts) { %>
   <li><a href="/posts/<%= post.id %>"><%= post.title %></a></li>
