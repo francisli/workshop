@@ -4,7 +4,11 @@ var models = require('../models');
 
 /* GET list of posts */
 router.get('/', function(req, res, next) {
-  models.Post.all().then(function(results) {
+  models.Post.all({
+    order: [
+      ['updatedAt', 'DESC']
+    ]
+  }).then(function(results) {
     res.render('posts/index', {
        title: 'Posts',
        posts: results
@@ -37,8 +41,8 @@ router.get('/:id/edit', function(req, res, next) {
   });
 });
 
-/* POST updated data to an existing post */
-router.post('/:id', function(req, res, next) {
+/* PATCH updated data to an existing post */
+router.patch('/:id', function(req, res, next) {
   models.Post.findById(req.params.id).then(function(post) {
     post.update({
       title: req.body.title,
@@ -55,6 +59,15 @@ router.get('/:id', function(req, res, next) {
     res.render('posts/show', {
       title: 'Show Post',
       post: post
+    });
+  });
+});
+
+/* DELETE a specific post */
+router.delete('/:id', function(req, res, next) {
+  models.Post.findById(req.params.id).then(function(post) {
+    post.destroy().then(function() {
+      res.redirect('/posts');
     });
   });
 });

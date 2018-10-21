@@ -1,4 +1,7 @@
 <h1><%= post.title %></h1>
 <p><%= post.body %></p>
 <p><a href="/posts/<%= post.id %>/edit" class="btn btn-primary">Edit Post</a></p>
+<form method="POST" action="/posts/<%= post.id %>?_method=DELETE">
+  <button class="btn btn-danger">Delete!</button>
+</form>
 <p><a href="/posts">&laquo; Back to list...</a></p>
