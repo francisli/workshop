@@ -1,3 +1,7 @@
 <h1><%= article.title %></h1>
 <p><%= article.body %></p>
+<p><a href="/articles/<%= article.id %>/edit" class="btn btn-primary">Edit</a></p>
+<form method="post" action="/articles/<%= article.id %>?_method=DELETE">
+  <p><button class="btn btn-danger">Delete</button></p>
+</form>
 <p><a href="/articles">&laquo; Back to list...</a></p>

@@ -27,6 +27,37 @@ router.get('/new', function(req, res, next) {
   res.render('articles/new', { title: 'New Article' });
 });
 
+/* GET a an editing form */
+router.get('/:id/edit', function(req, res, next) {
+  models.Article.findById(req.params.id).then(function(article) {
+    res.render('articles/edit', {
+      title: 'Edit Article',
+      article: article
+    });
+  });
+});
+
+/* PATCH update an existing article */
+router.patch('/:id', function(req, res, next) {
+  models.Article.findById(req.params.id).then(function(article) {
+    article.update({
+      title: req.body.title,
+      body: req.body.body
+    }).then(function() {
+      res.redirect(`/articles/${article.id}`);
+    });
+  });
+});
+
+/* DELETE a specific article */
+router.delete('/:id', function(req, res, next) {
+  models.Article.findById(req.params.id).then(function(article) {
+    article.destroy().then(function() {
+      res.redirect('/articles');
+    });
+  });
+});
+
 /* GET a specific post */
 router.get('/:id', function(req, res, next) {
   models.Article.findById(req.params.id).then(function(article) {
