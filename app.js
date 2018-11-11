@@ -9,6 +9,7 @@ var methodOverride = require('method-override');
 var indexRouter = require('./routes/index');
 var postsRouter = require('./routes/posts');
 var articlesRouter = require('./routes/articles');
+var registrationsRouter = require('./routes/registrations');
 var usersRouter = require('./routes/users');
 
 var app = express();
@@ -29,6 +30,7 @@ app.use('/libraries/bootstrap', express.static(path.join(__dirname, 'node_module
 app.use('/', indexRouter);
 app.use('/posts', postsRouter);
 app.use('/articles', articlesRouter);
+app.use('/register', registrationsRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
