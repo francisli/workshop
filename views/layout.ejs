@@ -18,8 +18,23 @@
                 <a class="nav-link" href="/">Home</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" href="/articles">Articles</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="/posts">Posts</a>
               </li>
+              <% if (current_user) { %>
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout">Log out <%= current_user.login %></a>
+                </li>
+              <% } else { %>
+                <li class="nav-item">
+                  <a class="nav-link" href="/login">Log in</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/register">Register</a>
+                </li>
+              <% } %>
             </ul>
           </div>
         </nav>
@@ -27,6 +42,12 @@
           <p>&nbsp;<p>
         <main role="main" class="container">
           <div class="starter-template">
+            <% if (flash.info) { %>
+            <div class="alert alert-success"><%= flash.info.join(' '); %></div>
+            <% } %>
+            <% if (flash.error) { %>
+            <div class="alert alert-danger"><%= flash.error.join(' '); %></div>
+            <% } %>
             <%- body %>
           </div>
        </main><!-- /.container -->
